@@ -1,1 +1,92 @@
+<p>вы должны картелю 1000 рублей:</p>
+            <ul style="text-align: left;">
+                <li>спой фиксай честный человек, чтобы погасить долг 400 рублей</li>
+                <li>крутить снова 1000 рублей</li>
+                
+            </ul>
+            <button class="close-modal" id="depositBtn">Внести депозит</button>
+            <button class="close-modal" id="closeModal">Закрыть</button>
+        </div>
+    </div>
 
+    <script>
+        const symbols = ["🍒", "🍋", "🍊", "🍇", "🔔", "7", "💰"];
+        const slots = [
+            document.getElementById("slot1"),
+            document.getElementById("slot2"),
+            document.getElementById("slot3")
+        ];
+        const spinBtn = document.getElementById("spinBtn");
+        const attemptsText = document.getElementById("attemptsText");
+        const depositModal = document.getElementById("depositModal");
+        const depositBtn = document.getElementById("depositBtn");
+        const closeModal = document.getElementById("closeModal");
+
+        let attempts = 3;
+        let isSpinning = false;
+
+        // Функция для рандомного символа
+        function getRandomSymbol() {
+            return symbols[Math.floor(Math.random() * symbols.length)];
+        }
+
+        // Анимация вращения
+        function spinSlots() {
+            if (isSpinning) return;
+            isSpinning = true;
+            attempts--;
+            attemptsText.textContent = Осталось попыток: ${attempts};
+
+            let spins = 0;
+            const totalSpins = 20 + Math.floor(Math.random() * 10);
+            const spinInterval = setInterval(() => {
+                slots.forEach(slot => {
+                    slot.textContent = getRandomSymbol();
+                });
+                spins++;
+                
+                if (spins >= totalSpins) {
+                    clearInterval(spinInterval);
+                    isSpinning = false;
+                    checkWin();
+                    
+                    if (attempts === 0) {
+                        spinBtn.disabled = true;
+                        setTimeout(() => {
+                            depositModal.style.display = "flex";
+                        }, 1000);
+                    } else {
+                        spinBtn.textContent = Крутить (${attempts} попытки);
+                    }
+                }
+            }, 100);
+        }
+
+        // Проверка выигрыша (3 одинаковых символа)
+        function checkWin() {
+            const values = slots.map(slot => slot.textContent);
+            if (values[0] === values[1] && values[1] === values[2]) {
+                slots.forEach(slot => {
+                    slot.classList.add("win-animation");
+                });
+                setTimeout(() => {
+                    slots.forEach(slot => {
+                        slot.classList.remove("win-animation");
+                    });
+                    alert(🎉 Вы выиграли! Символы: ${values[0]} ${values[1]} ${values[2]});
+                }, 1500);
+            }
+        }
+
+        // Обработчики событий
+        spinBtn.addEventListener("click", spinSlots);
+        depositBtn.addEventListener("click", () => {
+            alert("Переход на страницу оплаты...");
+            depositModal.style.display = "none";
+        });
+        closeModal.addEventListener("click", () => {
+            depositModal.style.display = "none";
+        });
+    </script>
+</body>
+</html>
