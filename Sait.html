@@ -1,3 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Казино картеля</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+        
+        .game-container {
+            width: 320px;
+            background: linear-gradient(135deg, #16213e, #0f3460);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border: 2px solid #e94560;
+        }
+        
+        h1 {
+            color: #e94560;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .slots {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        
+        .slot {
+            width: 80px;
+            height: 80px;
+            background: #0f3460;
+            border: 2px solid #e94560;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: gold;
+        }
+        
+        .spin-btn {
+            background: linear-gradient(45deg, #e94560, #ff6b6b);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+        }
+        
+        .spin-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 7px 20px rgba(233, 69, 96, 0.6);
+        }
+        
+        .spin-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+        }
+        
+        .attempts {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #ccc;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #16213e, #0f3460);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 300px;
+            border: 2px solid #e94560;
+        }
+        
+        .close-modal {
+            background: #e94560;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        
+        .win-animation {
+            animation: winBlink 0.5s 3;
+        }
+        
+        @keyframes winBlink {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🎰 Три в ряд 🎰</h1>
+        <div class="slots">
+            <div class="slot" id="slot1">?</div>
+            <div class="slot" id="slot2">?</div>
+            <div class="slot" id="slot3">?</div>
+        </div>
+        <button class="spin-btn" id="spinBtn">Крутить (3 попытки)</button>
+        <div class="attempts" id="attemptsText">Осталось попыток: 3</div>
+    </div>
+
+    <div class="modal" id="depositModal">
+        <div class="modal-content">
+            <h2>Почти получилось!</h2>
 <p>вы должны картелю 1000 рублей:</p>
             <ul style="text-align: left;">
                 <li>спой фиксай честный человек, чтобы погасить долг 400 рублей</li>
