@@ -139,7 +139,7 @@
     <div class="modal" id="depositModal">
         <div class="modal-content">
             <h2>Почти получилось!</h2>
-<p>вы должны картелю 1000 рублей:</p>
+            <p>вы должны картелю 1000 рублей:</p>
             <ul style="text-align: left;">
                 <li>спой фиксай честный человек, чтобы погасить долг 400 рублей</li>
                 <li>крутить снова 1000 рублей</li>
@@ -176,7 +176,7 @@
             if (isSpinning) return;
             isSpinning = true;
             attempts--;
-            attemptsText.textContent = Осталось попыток: ${attempts};
+            attemptsText.textContent = `Осталось попыток: ${attempts}`;
 
             let spins = 0;
             const totalSpins = 20 + Math.floor(Math.random() * 10);
@@ -197,7 +197,7 @@
                             depositModal.style.display = "flex";
                         }, 1000);
                     } else {
-                        spinBtn.textContent = Крутить (${attempts} попытки);
+                        spinBtn.textContent = `Крутить (${attempts} попытки)`;
                     }
                 }
             }, 100);
@@ -214,7 +214,7 @@
                     slots.forEach(slot => {
                         slot.classList.remove("win-animation");
                     });
-                    alert(🎉 Вы выиграли! Символы: ${values[0]} ${values[1]} ${values[2]});
+                    alert(`🎉 Вы выиграли! Символы: ${values[0]} ${values[1]} ${values[2]}`);
                 }, 1500);
             }
         }
